@@ -1,0 +1,24 @@
+{
+    "name": "UnifiedRTC",
+    "version": "1.0.0",
+    "description": "A unified Real Time Clock library for Arduino",
+    "keywords": [
+        "RTC",
+        "real time clock"
+    ],
+    "authors": [
+        {
+            "name": "Francesco Simonetti",
+            "maintainer": true,
+            "url": "https://github.com/kkfranco98"
+        }
+    ],
+    "license": "MIT",
+    "frameworks": [
+        "arduino"
+    ],
+    "platforms": "*",
+    "repository": {
+        "type": "git" 
+    }
+}
