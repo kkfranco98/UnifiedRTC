@@ -10,15 +10,15 @@ namespace UnifiedRTC
         ESP32Time _ESP32_RTC;
 
     public:
-        ESP32_RTC() {};
-        ESP32_RTC(uint64_t epoch) { _ESP32_RTC.setTime(epoch); };
+        ESP32_RTC() = default;
+        explicit ESP32_RTC(uint64_t epoch) { _ESP32_RTC.setTime(epoch); };
 
         uint64_t get_epoch() override;
         void set_epoch(const uint64_t &epoch, const uint16_t &ms = 0) override;
         uint16_t get_year() override;
         uint16_t get_month() override;
         uint16_t get_day() override;
-        uint16_t get_hour(bool) override;
+        uint16_t get_hour(bool is_24h = true) override;
         uint16_t get_minute() override;
         uint16_t get_second() override;
         uint16_t get_millisecond() override;

@@ -28,9 +28,9 @@ namespace UnifiedRTC
         return _ESP32_RTC.getDay();
     }
 
-    uint16_t ESP32_RTC::get_hour(bool mode)
+    uint16_t ESP32_RTC::get_hour(bool is_24h)
     {
-        return _ESP32_RTC.getHour(mode);
+        return _ESP32_RTC.getHour(is_24h);
     }
 
     uint16_t ESP32_RTC::get_minute()

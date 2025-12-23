@@ -2,40 +2,40 @@
 
 #include <Arduino.h>
 
-inline const String normalize_date(const uint16_t &year, const uint16_t &month, const uint16_t &day,
-                                   const uint16_t &hour, const uint16_t &minute, const uint16_t &second,
-                                   const uint16_t &millisecond)
-
+inline String normalize_date(const uint16_t &year,
+                             const uint16_t &month,
+                             const uint16_t &day,
+                             const uint16_t &hour,
+                             const uint16_t &minute,
+                             const uint16_t &second,
+                             const uint16_t &millisecond)
 {
-    String date = "";
-
-    if (year >= 1970 and year <= 9999 and month <= 12 and day <= 31 and
-        hour <= 23 and minute <= 59 and second <= 59 and
-        millisecond <= 999)
+    // Validation
+    if (!(year >= 1970 && year <= 9999 &&
+          month <= 12 &&
+          day <= 31 &&
+          hour <= 23 &&
+          minute <= 59 &&
+          second <= 59 &&
+          millisecond <= 999))
     {
-        date += String(year) + "-";
-
-        month < 10 ? date += "0" + String(month) : date += String(month);
-        date += "-";
-
-        day < 10 ? date += "0" + String(day) : date += String(day);
-        date += "+";
-
-        hour < 10 ? date += "0" + String(hour) : date += String(hour);
-        date += "-";
-
-        minute < 10 ? date += "0" + String(minute) : date += String(minute);
-        date += "-";
-
-        second < 10 ? date += "0" + String(second) : date += String(second);
-        date += "+";
-
-        millisecond < 100 ? (millisecond < 10 ? date += "00" + String(millisecond) : date += "0" + String(millisecond)) : date += String(millisecond);
-    }
-    else
-    {
-        date = "INVALID_DATE";
+        return "INVALID_DATE";
     }
 
-    return date;
+    // Format:
+    // YYYY-MM-DD+HH-MM-SS+mmm
+    // Max length: 4+1+2+1+2+1+2+1+2+1+2+1+3 = 24 + '\0'
+    char buffer[25];
+
+    snprintf(buffer, sizeof(buffer),
+             "%04u-%02u-%02u+%02u-%02u-%02u+%03u",
+             (unsigned)year,
+             (unsigned)month,
+             (unsigned)day,
+             (unsigned)hour,
+             (unsigned)minute,
+             (unsigned)second,
+             (unsigned)millisecond);
+
+    return String(buffer);
 }
