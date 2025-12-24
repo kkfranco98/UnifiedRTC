@@ -1,3 +1,7 @@
+#pragma once
+
+#if defined(ESP32)
+
 #include "RTC_interface/RTC_interface.h"
 
 #include <ESP32Time.h>
@@ -27,3 +31,5 @@ namespace UnifiedRTC
         uint16_t get_day_of_week() override;
     };
 };
+
+#endif
